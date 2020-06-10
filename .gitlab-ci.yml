@@ -1,3 +1,5 @@
 job1:
+  tags:
+    - dev
   script:
     - echo abc
