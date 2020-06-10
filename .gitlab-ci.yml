@@ -1,5 +1,11 @@
 job1:
+  only:
+    - master
   tags:
-    - dev
+    - prod
   script:
-    - echo abc
+    - cp .env.prod .env
+    - yarn
+    - yarn build
+    - pm2 delete facebook || true
+    - pm2 start --name facebook "yarn start:prod"
