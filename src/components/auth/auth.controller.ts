@@ -3,6 +3,7 @@ import { AuthService } from "./auth.service";
 import { ApiTags } from "@nestjs/swagger";
 import { AuthGuard } from "@nestjs/passport";
 import { CreateUserDto } from "./dto/create-user.dto";
+import passport = require("passport");
 
 @Controller('/auth')
 @ApiTags('auth')
@@ -23,4 +24,8 @@ export class AuthController {
     //     }
     //     return Error("Can not signup")
     // }
+    @Post('/register')
+    async register(@Body() body: CreateUserDto): Promise<any> {
+        return this.authService.register(body.username, body.password, body.fullname);
+    }
 }
